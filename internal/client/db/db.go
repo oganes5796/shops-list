@@ -15,14 +15,14 @@ func NewPostgresDB(ctx context.Context, cfg config.Config) (*pgx.Conn, error) {
 
 	conn, err := pgx.Connect(ctx, dsn)
 	if err != nil {
-		slog.Error("db:Connect", "error", err)
+		slog.Error("NewPostgresDB:Connect", "error", err)
 		return nil, err
 	}
 
 	err = conn.Ping(ctx)
 	if err != nil {
 		conn.Close(ctx)
-		slog.Error("db:Ping", "error", err)
+		slog.Error("NewPostgresDB:Ping", "error", err)
 		return nil, err
 	}
 

@@ -1,10 +1,7 @@
 package config
 
 import (
-	"log/slog"
 	"os"
-
-	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -17,12 +14,6 @@ type Config struct {
 }
 
 func NewCfgDB() Config {
-	err := godotenv.Load()
-	if err != nil {
-		slog.Error("Error loading .env file", "error", err)
-		os.Exit(1)
-	}
-
 	cfg := Config{
 		Host:     os.Getenv("POSTGRES_HOST"),
 		Port:     os.Getenv("POSTGRES_PORT"),
