@@ -21,14 +21,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	cfg := config.Config{
-		Host:     os.Getenv("POSTGRES_HOST"),
-		Port:     os.Getenv("POSTGRES_PORT"),
-		User:     os.Getenv("POSTGRES_USER"),
-		Password: os.Getenv("POSTGRES_PASSWORD"),
-		Database: os.Getenv("POSTGRES_DB"),
-		SSLMode:  "disable",
-	}
+	cfg := config.NewCfgDB()
 	pool, err := db.NewPostgresDB(ctx, cfg)
 	if err != nil {
 		panic(err)
