@@ -41,7 +41,7 @@ func main() {
 
 	srv := &srvShop.Server{}
 	go func() {
-		if err := srv.Run(os.Getenv("PORT"), handlers.InitRoutes()); err != nil {
+		if err := srv.Run(os.Getenv("HOST"), os.Getenv("PORT"), handlers.InitRoutes()); err != nil {
 			slog.Error("error occurred while running http server", "error", err)
 			os.Exit(1)
 		}

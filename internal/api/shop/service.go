@@ -32,7 +32,7 @@ func (im *Implementation) InitRoutes() *gin.Engine {
 		{
 			shops.POST("/")
 			shops.GET("/")
-			shops.GET("/:id")
+			shops.GET("/:id", im.GetByID)
 			shops.PUT("/:id")
 			shops.DELETE("/:id")
 		}

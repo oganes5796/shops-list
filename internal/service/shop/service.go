@@ -28,11 +28,6 @@ func (r *shopService) GetAll(ctx context.Context) ([]model.Shop, error) {
 	return nil, nil
 }
 
-func (r *shopService) GetByID(ctx context.Context, id int64) (*model.Shop, error) {
-	// Implementation here
-	return nil, nil
-}
-
 func (r *shopService) Update(ctx context.Context, id int64, info *model.ShopInfo) error {
 	// Implementation here
 	return nil
