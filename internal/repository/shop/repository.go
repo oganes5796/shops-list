@@ -23,11 +23,6 @@ func (r *shopRepository) Create(ctx context.Context, info *model.ShopInfo) (int6
 	return 0, nil
 }
 
-func (r *shopRepository) GetAll(ctx context.Context) ([]model.Shop, error) {
-	// Implementation here
-	return nil, nil
-}
-
 func (r *shopRepository) GetByID(ctx context.Context, id int64) (*model.Shop, error) {
 	// Implementation here
 	return nil, nil

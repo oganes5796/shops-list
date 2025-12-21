@@ -31,7 +31,7 @@ func (im *Implementation) InitRoutes() *gin.Engine {
 		shops := api.Group("/shops")
 		{
 			shops.POST("/")
-			shops.GET("/")
+			shops.GET("/", im.GetAll)
 			shops.GET("/:id")
 			shops.PUT("/:id")
 			shops.DELETE("/:id")
