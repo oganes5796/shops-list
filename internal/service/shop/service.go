@@ -37,8 +37,3 @@ func (r *shopService) Update(ctx context.Context, id int64, info *model.ShopInfo
 	// Implementation here
 	return nil
 }
-
-func (r *shopService) Delete(ctx context.Context, id int64) error {
-	// Implementation here
-	return nil
-}
