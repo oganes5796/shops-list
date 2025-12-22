@@ -33,11 +33,6 @@ func (r *shopRepository) GetByID(ctx context.Context, id int64) (*model.Shop, er
 	return nil, nil
 }
 
-func (r *shopRepository) Update(ctx context.Context, id int64, info *model.ShopInfo) error {
-	// Implementation here
-	return nil
-}
-
 func (r *shopRepository) Delete(ctx context.Context, id int64) error {
 	// Implementation here
 	return nil
