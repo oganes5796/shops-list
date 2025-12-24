@@ -23,7 +23,7 @@ func (r *shopRepository) Update(ctx context.Context, idShop int64, info *model.S
 	}
 
 	if result.RowsAffected() == 0 {
-		return fmt.Errorf("repository:Update:RowsAffected: %w", err)
+		return model.ErrShopNotFound
 	}
 
 	return nil

@@ -1,6 +1,7 @@
 package shop
 
 import (
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -10,21 +11,26 @@ import (
 
 func (im *Implementation) Update(c *gin.Context) {
 	idStr := c.Param("id")
-	id, _ := strconv.ParseInt(idStr, 10, 64)
-
-	var info model.ShopInfo
-	if err := c.BindJSON(&info); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "api:update:BindJSON",
-		})
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
 		return
 	}
 
-	err := im.shopService.Update(c.Request.Context(), id, &info)
+	var info model.ShopInfo
+	if err := c.BindJSON(&info); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid body"})
+		return
+	}
+
+	err = im.shopService.Update(c.Request.Context(), id, &info)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "api:update:shopService.Update",
-		})
+		if errors.Is(err, model.ErrShopNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "shop not found"})
+			return
+		}
+
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "internal error"})
 		return
 	}
 
