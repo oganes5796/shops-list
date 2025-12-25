@@ -27,12 +27,12 @@ func (r *shopRepository) GetAll(ctx context.Context) ([]model.Shop, error) {
 	return nil, nil
 }
 
-func (r *shopRepository) GetByID(ctx context.Context, idShop int64) (*model.Shop, error) {
+func (r *shopRepository) Update(ctx context.Context, id int64, info *model.ShopInfo) error {
 	// Implementation here
-	return nil, nil
+	return nil
 }
 
-func (r *shopRepository) Delete(ctx context.Context, idShop int64) error {
+func (r *shopRepository) Delete(ctx context.Context, id int64) error {
 	// Implementation here
 	return nil
 }
