@@ -34,7 +34,7 @@ func (im *Implementation) InitRoutes() *gin.Engine {
 			shops.GET("/")
 			shops.GET("/:id", im.GetByID)
 			shops.PUT("/:id")
-			shops.DELETE("/:id")
+			shops.DELETE("/:id", im.Delete)
 		}
 	}
 
