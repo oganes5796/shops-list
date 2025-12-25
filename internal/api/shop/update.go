@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/oganes5796/shops-list/internal/model"
+	servShop "github.com/oganes5796/shops-list/internal/service/shop"
 )
 
 func (im *Implementation) Update(c *gin.Context) {
@@ -25,7 +26,7 @@ func (im *Implementation) Update(c *gin.Context) {
 
 	err = im.shopService.Update(c.Request.Context(), id, &info)
 	if err != nil {
-		if errors.Is(err, model.ErrShopNotFound) {
+		if errors.Is(err, servShop.ErrShopNotFound) {
 			c.JSON(http.StatusNotFound, gin.H{"error": "shop not found"})
 			return
 		}
