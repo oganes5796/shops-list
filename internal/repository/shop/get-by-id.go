@@ -9,11 +9,11 @@ import (
 	"github.com/oganes5796/shops-list/internal/model"
 )
 
-func (r *shopRepository) GetByID(ctx context.Context, id int64) (*model.Shop, error) {
+func (r *shopRepository) GetByID(ctx context.Context, idShop int64) (*model.Shop, error) {
 	var shop model.Shop
 
 	query := fmt.Sprintf("SELECT id, title, address, operating_mode, created_at, updated_at FROM %s WHERE id=$1", tableName)
-	row := r.conn.QueryRow(ctx, query, id)
+	row := r.conn.QueryRow(ctx, query, idShop)
 	err := row.Scan(
 		&shop.ID,
 		&shop.Info.Title,
