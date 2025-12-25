@@ -6,6 +6,11 @@ import (
 	"github.com/oganes5796/shops-list/internal/model"
 )
 
-func (r *shopService) GetAll(ctx context.Context) ([]model.Shop, error) {
-	return r.repo.GetAll(ctx)
+func (s *shopService) GetAll(ctx context.Context) ([]model.Shop, error) {
+	shops, err := s.repo.GetAll(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return shops, nil
 }

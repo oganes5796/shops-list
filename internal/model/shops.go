@@ -3,7 +3,7 @@ package model
 import "time"
 
 type Shop struct {
-	ID        int64     `json:"-" db:"id"`
+	ID        int64     `json:"id" db:"id"`
 	Info      ShopInfo  `json:"info" db:"-"`
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`

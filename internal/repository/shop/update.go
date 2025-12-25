@@ -7,8 +7,6 @@ import (
 	"github.com/oganes5796/shops-list/internal/model"
 )
 
-const tableName = "shops"
-
 func (r *shopRepository) Update(ctx context.Context, idShop int64, info *model.ShopInfo) error {
 	query := fmt.Sprintf(`
 		UPDATE %s 

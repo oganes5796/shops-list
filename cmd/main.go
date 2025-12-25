@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"errors"
 	"log/slog"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/oganes5796/shops-list/internal/client/db"
@@ -41,20 +44,29 @@ func main() {
 
 	srv := &srvShop.Server{}
 	go func() {
-		if err := srv.Run(os.Getenv("HOST"), os.Getenv("PORT"), handlers.InitRoutes()); err != nil {
+		if err := srv.Run(
+			os.Getenv("HOST"),
+			os.Getenv("PORT"),
+			handlers.InitRoutes(),
+		); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			slog.Error("error occurred while running http server", "error", err)
-			os.Exit(1)
 		}
 	}()
 	slog.Info("App started")
 
 	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
+
 	slog.Info("App shutting down")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
 	if err := srv.Shutdown(ctx); err != nil {
 		slog.Error("error occurred on server shutting down", "error", err)
 	}
+
 	slog.Info("App exited")
 
 }

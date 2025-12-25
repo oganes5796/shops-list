@@ -11,7 +11,7 @@ func (im *Implementation) Create(c *gin.Context) {
 	var info *model.ShopInfo
 	if err := c.BindJSON(&info); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "api:Create:BindJSON",
+			"error": "internal error",
 		})
 		return
 	}

@@ -2,13 +2,11 @@ package shop
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/oganes5796/shops-list/internal/model"
-)
-
-const (
-	tableName = "shops"
 )
 
 func (r *shopRepository) GetByID(ctx context.Context, id int64) (*model.Shop, error) {
@@ -25,6 +23,10 @@ func (r *shopRepository) GetByID(ctx context.Context, id int64) (*model.Shop, er
 		&shop.UpdatedAt,
 	)
 	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, ErrShopNotFound
+		}
+
 		return nil, fmt.Errorf("repository:GetByID:row.Scan: %w", err)
 	}
 

@@ -10,7 +10,7 @@ func (im *Implementation) GetAll(c *gin.Context) {
 	lists, err := im.shopService.GetAll(c.Request.Context())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "api:GetAll:Service.GetAll",
+			"error": "internal error",
 		})
 		return
 	}
