@@ -8,6 +8,10 @@ import (
 	"github.com/oganes5796/shops-list/internal/repository"
 )
 
+const (
+	tableName = "shops"
+)
+
 type shopRepository struct {
 	conn *pgx.Conn
 }
@@ -16,11 +20,6 @@ func NewRepository(conn *pgx.Conn) repository.ShopRepository {
 	return &shopRepository{
 		conn: conn,
 	}
-}
-
-func (r *shopRepository) Create(ctx context.Context, info *model.ShopInfo) (int64, error) {
-	// Implementation here
-	return 0, nil
 }
 
 func (r *shopRepository) GetAll(ctx context.Context) ([]model.Shop, error) {
