@@ -18,17 +18,7 @@ func NewService(repo repository.ShopRepository) service.ShopService {
 	}
 }
 
-func (r *shopService) Create(ctx context.Context, info *model.ShopInfo) (int64, error) {
-	// Implementation here
-	return 0, nil
-}
-
 func (r *shopService) GetAll(ctx context.Context) ([]model.Shop, error) {
-	// Implementation here
-	return nil, nil
-}
-
-func (r *shopService) GetByID(ctx context.Context, id int64) (*model.Shop, error) {
 	// Implementation here
 	return nil, nil
 }
