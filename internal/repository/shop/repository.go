@@ -13,7 +13,7 @@ type shopRepository struct {
 	conn *pgx.Conn
 }
 
-func NewRepository(conn *pgx.Conn) repository.ShopRepository {
+func NewShopRepository(conn *pgx.Conn) repository.ShopRepository {
 	return &shopRepository{
 		conn: conn,
 	}

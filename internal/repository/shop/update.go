@@ -17,7 +17,7 @@ func (r *shopRepository) Update(ctx context.Context, idShop int64, info *model.S
 	result, err := r.conn.Exec(ctx, query,
 		info.Title, info.Address, info.OperatingMode, idShop)
 	if err != nil {
-		return fmt.Errorf("repository:Update:exec: %w", err)
+		return fmt.Errorf("repository:shop:Update:exec: %w", err)
 	}
 
 	if result.RowsAffected() == 0 {

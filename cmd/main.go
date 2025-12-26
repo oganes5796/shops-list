@@ -14,10 +14,10 @@ import (
 	"github.com/oganes5796/shops-list/internal/client/db"
 	"github.com/oganes5796/shops-list/internal/config"
 
-	apiShop "github.com/oganes5796/shops-list/internal/api/shop"
-	repoShop "github.com/oganes5796/shops-list/internal/repository/shop"
-	srvShop "github.com/oganes5796/shops-list/internal/server/shop"
-	serviceShop "github.com/oganes5796/shops-list/internal/service/shop"
+	"github.com/oganes5796/shops-list/internal/api"
+	"github.com/oganes5796/shops-list/internal/repository/repo"
+	"github.com/oganes5796/shops-list/internal/server"
+	"github.com/oganes5796/shops-list/internal/service/serv"
 )
 
 func main() {
@@ -38,11 +38,11 @@ func main() {
 	defer pool.Close(ctx)
 	slog.Info("Successfully connected to PostgreSQL")
 
-	repos := repoShop.NewRepository(pool)
-	services := serviceShop.NewService(repos)
-	handlers := apiShop.NewImplementation(services)
+	repos := repo.NewRepository(pool)
+	services := serv.NewService(repos)
+	handlers := api.NewImplementation(services)
 
-	srv := &srvShop.Server{}
+	srv := &server.Server{}
 	go func() {
 		if err := srv.Run(
 			os.Getenv("HOST"),

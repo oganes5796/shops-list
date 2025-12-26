@@ -6,6 +6,11 @@ import (
 	"github.com/oganes5796/shops-list/internal/model"
 )
 
+type AuthService interface {
+	Register(ctx context.Context, user *model.UserInfo) (int64, error)
+	GetUserByUsername(ctx context.Context, username string) (*model.User, error)
+}
+
 type ShopService interface {
 	Create(ctx context.Context, info *model.ShopInfo) (int64, error)
 	GetAll(ctx context.Context) ([]model.Shop, error)
