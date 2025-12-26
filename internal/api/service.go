@@ -1,19 +1,19 @@
-package shop
+package api
 
 import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/oganes5796/shops-list/internal/service"
+	"github.com/oganes5796/shops-list/internal/service/serv"
 )
 
 type Implementation struct {
-	shopService service.ShopService
+	services *serv.Serv
 }
 
-func NewImplementation(shopService service.ShopService) *Implementation {
+func NewImplementation(services *serv.Serv) *Implementation {
 	return &Implementation{
-		shopService: shopService,
+		services: services,
 	}
 }
 

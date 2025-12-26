@@ -1,4 +1,4 @@
-package shop
+package server
 
 import (
 	"context"
