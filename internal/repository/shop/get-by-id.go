@@ -27,7 +27,7 @@ func (r *shopRepository) GetByID(ctx context.Context, idShop int64) (*model.Shop
 			return nil, ErrShopNotFound
 		}
 
-		return nil, fmt.Errorf("repository:GetByID:row.Scan: %w", err)
+		return nil, fmt.Errorf("repository:shop:GetByID:row.Scan: %w", err)
 	}
 
 	return &shop, nil

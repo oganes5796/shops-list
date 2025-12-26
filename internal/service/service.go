@@ -7,7 +7,7 @@ import (
 )
 
 type AuthService interface {
-	CreateUser(ctx context.Context, user *model.UserInfo) (int64, error)
+	Register(ctx context.Context, user *model.UserInfo) (int64, error)
 	GetUserByUsername(ctx context.Context, username string) (*model.User, error)
 }
 

@@ -12,7 +12,7 @@ func (r *shopRepository) Create(ctx context.Context, info *model.ShopInfo) (int6
 	query := fmt.Sprintf("INSERT INTO %s (title, address, operating_mode) VALUES ($1, $2, $3) RETURNING id", tableName)
 	row := r.conn.QueryRow(ctx, query, info.Title, info.Address, info.OperatingMode)
 	if err := row.Scan(&id); err != nil {
-		return 0, fmt.Errorf("repository:Create:row.Scan")
+		return 0, fmt.Errorf("repository:shop:Create:row.Scan")
 	}
 	return id, nil
 }

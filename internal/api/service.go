@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/oganes5796/shops-list/internal/model"
 	"github.com/oganes5796/shops-list/internal/service/serv"
 )
 
@@ -26,16 +27,24 @@ func (im *Implementation) InitRoutes() *gin.Engine {
 		})
 	})
 
-	api := router.Group("/api")
+	auth := router.Group("/auth")
 	{
-		shops := api.Group("/shops")
-		{
-			shops.POST("/", im.Create)
-			shops.GET("/", im.GetAll)
-			shops.GET("/:id", im.GetByID)
-			shops.PUT("/:id", im.Update)
-			shops.DELETE("/:id", im.Delete)
-		}
+		auth.POST("/register", im.Register)
+		auth.POST("/login", im.Login)
+	}
+
+	api := router.Group("/api")
+
+	api.Use(AuthMiddleware(im.services.AuthService))
+
+	shops := api.Group("/shops")
+	{
+		shops.GET("/", RoleMiddleware(model.RoleUser, model.RoleManager), im.GetAll)
+		shops.GET("/:id", RoleMiddleware(model.RoleUser, model.RoleManager), im.GetByID)
+
+		shops.POST("/", RoleMiddleware(model.RoleManager), im.Create)
+		shops.PUT("/:id", RoleMiddleware(model.RoleManager), im.Update)
+		shops.DELETE("/:id", RoleMiddleware(model.RoleManager), im.Delete)
 	}
 
 	return router

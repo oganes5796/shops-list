@@ -13,7 +13,7 @@ func (r *shopRepository) GetAll(ctx context.Context) ([]model.Shop, error) {
 	query := fmt.Sprintf("SELECT id, title, address, operating_mode, created_at, updated_at FROM %s", tableName)
 	rows, err := r.conn.Query(ctx, query)
 	if err != nil {
-		return nil, fmt.Errorf("repository:GetAll:Query: %w", err)
+		return nil, fmt.Errorf("repository:shop:GetAll:Query: %w", err)
 	}
 	defer rows.Close()
 
@@ -26,13 +26,13 @@ func (r *shopRepository) GetAll(ctx context.Context) ([]model.Shop, error) {
 			&shop.Info.OperatingMode,
 			&shop.CreatedAt,
 			&shop.UpdatedAt); err != nil {
-			return nil, fmt.Errorf("repository:GetAll:Scan: %w", err)
+			return nil, fmt.Errorf("repository:shop:GetAll:Scan: %w", err)
 		}
 		lists = append(lists, shop)
 	}
 
 	if err := rows.Err(); err != nil {
-		return nil, fmt.Errorf("repository:GetAll:RowsErr: %w", err)
+		return nil, fmt.Errorf("repository:shop:GetAll:RowsErr: %w", err)
 	}
 
 	return lists, nil
