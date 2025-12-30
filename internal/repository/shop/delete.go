@@ -10,7 +10,7 @@ func (r *shopRepository) Delete(ctx context.Context, idShop int64) error {
 	result, err := r.conn.Exec(ctx, query, idShop)
 
 	if err != nil {
-		return fmt.Errorf("repository:Delete:exec: %w", err)
+		return fmt.Errorf("repository:shop:Delete:exec: %w", err)
 	}
 
 	if result.RowsAffected() == 0 {

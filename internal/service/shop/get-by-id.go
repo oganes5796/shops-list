@@ -8,8 +8,8 @@ import (
 	repoShop "github.com/oganes5796/shops-list/internal/repository/shop"
 )
 
-func (r *shopService) GetByID(ctx context.Context, idShop int64) (*model.Shop, error) {
-	shop, err := r.repo.GetByID(ctx, idShop)
+func (s *shopService) GetByID(ctx context.Context, idShop int64) (*model.Shop, error) {
+	shop, err := s.repo.GetByID(ctx, idShop)
 	if err != nil {
 		if errors.Is(err, repoShop.ErrShopNotFound) {
 			return nil, ErrShopNotFound
