@@ -12,5 +12,19 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  db_orders:
+    image: postgres:15-alpine # Легковесный образ
+    container_name: orders_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_ORDERS_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_ORDERS_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_ORDERS_DB}
+    ports:
+      - "${POSTGRES_ORDERS_PORT}:5432"
+    volumes:
+      - postgres_orders_data:/var/lib/postgresql/data
+
 volumes:
   postgres_data:
+  postgres_orders_data:
