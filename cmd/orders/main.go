@@ -11,13 +11,13 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
-	"github.com/oganes5796/shops-list/internal/shops-list/client/db"
-	"github.com/oganes5796/shops-list/internal/shops-list/config"
 
-	"github.com/oganes5796/shops-list/internal/shops-list/api"
-	"github.com/oganes5796/shops-list/internal/shops-list/repository/repo"
-	"github.com/oganes5796/shops-list/internal/shops-list/server"
-	"github.com/oganes5796/shops-list/internal/shops-list/service/serv"
+	"github.com/oganes5796/shops-list/internal/orders/api"
+	"github.com/oganes5796/shops-list/internal/orders/client/db"
+	"github.com/oganes5796/shops-list/internal/orders/config"
+	"github.com/oganes5796/shops-list/internal/orders/repository/repo"
+	"github.com/oganes5796/shops-list/internal/orders/server"
+	"github.com/oganes5796/shops-list/internal/orders/service/serv"
 )
 
 func main() {
@@ -46,7 +46,7 @@ func main() {
 	go func() {
 		if err := srv.Run(
 			os.Getenv("HOST"),
-			os.Getenv("PORT"),
+			os.Getenv("PORT_ORDERS"),
 			handlers.InitRoutes(),
 		); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			slog.Error("error occurred while running http server", "error", err)
@@ -68,5 +68,4 @@ func main() {
 	}
 
 	slog.Info("App exited")
-
 }
