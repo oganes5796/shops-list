@@ -33,7 +33,7 @@ func (im *Implementation) InitRoutes() *gin.Engine {
 		orders.GET("/:id", im.GetByID)
 
 		orders.POST("/", im.Create)
-		orders.PUT("/:id", im.Update)
+		orders.PATCH("/:id", im.Update)
 	}
 
 	return router

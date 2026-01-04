@@ -2,4 +2,4 @@ package orders
 
 import "errors"
 
-var ErrShopNotFound = errors.New("shop not found")
+var ErrOrderNotFound = errors.New("order not found")

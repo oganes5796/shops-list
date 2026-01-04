@@ -11,7 +11,7 @@ import (
 )
 
 func (im *Implementation) Create(c *gin.Context) {
-	var info *model.ShopInfo
+	var info model.ShopInfo
 	if err := c.BindJSON(&info); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "internal error",
@@ -19,7 +19,7 @@ func (im *Implementation) Create(c *gin.Context) {
 		return
 	}
 
-	id, err := im.services.ShopService.Create(c.Request.Context(), info)
+	id, err := im.services.ShopService.Create(c.Request.Context(), &info)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "api:Create:Service.Create",

@@ -21,7 +21,19 @@ type CartItem struct {
 	Price    float64 `json:"price" db:"price"`
 }
 
+type CreateOrderRequest struct {
+	UserID int        `json:"user_id" db:"user_id"`
+	ShopID int        `json:"shop_id" db:"shop_id"`
+	Cart   []CartItem `json:"cart" db:"-"`
+}
+
+type UpdateOrderRequest struct {
+	Status *OrderStatus `json:"status,omitempty" db:"status"`
+}
+
 type OrderInfo struct {
+	ID uuid.UUID `json:"id" db:"id"`
+
 	UserID int `json:"user_id" db:"user_id"`
 	ShopID int `json:"shop_id" db:"shop_id"`
 
@@ -34,8 +46,6 @@ type OrderInfo struct {
 }
 
 type Order struct {
-	ID uuid.UUID `json:"id" db:"id"`
-
 	Info OrderInfo `json:"info" db:"-"`
 
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
